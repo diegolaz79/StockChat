@@ -13,7 +13,7 @@
         <div class="col-md-12" id="chat">
             @if (Model != null)
             {
-                @foreach (var message in Model.OrderBy(m => m.MsgDate))
+                @foreach (var message in Model.OrderBy(m => m.MsgDate).Take(50))
                 {
                     string containerClass, timePosition, textAlign, contColor, offset;
                     if (userName == message.UserName)

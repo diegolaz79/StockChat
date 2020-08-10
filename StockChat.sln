@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockChat", "StockChat.csproj", "{832AF5D0-AD97-4094-890B-539C531B6B95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockChat", "StockChat.csproj", "{832AF5D0-AD97-4094-890B-539C531B6B95}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "StockChatInstaller", "..\StockChatInstaller\StockChatInstaller.vdproj", "{6D504947-E5F1-4F83-8B1D-5DDA27B96229}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{832AF5D0-AD97-4094-890B-539C531B6B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{832AF5D0-AD97-4094-890B-539C531B6B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{832AF5D0-AD97-4094-890B-539C531B6B95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D504947-E5F1-4F83-8B1D-5DDA27B96229}.Debug|Any CPU.ActiveCfg = Debug
+		{6D504947-E5F1-4F83-8B1D-5DDA27B96229}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
