@@ -38,8 +38,10 @@ namespace StockChat.Controllers
             return View(messages);
         }
 
-        public async Task<IActionResult> Create(Message msg)
-        {            
+        public async Task<IActionResult> Create(Message msg)//string msgText)
+        {
+            var now = new DateTime();
+            //Message msg = new Message();
             if (ModelState.IsValid)
             {
                 msg.UserName = User.Identity.Name;
@@ -50,20 +52,17 @@ namespace StockChat.Controllers
                     string quote = msg.Text.Replace("/stock=", "");
                     StockBot bot = new StockBot();
                     msg.Text = bot.GetQuote(quote);
-                    var sender = await _userManager.GetUserAsync(User);
-                    msg.UserID = sender.Id;
-                    await _context.Messages.AddAsync(msg);
-                    //await _context.SaveChangesAsync();                    
-                    return Ok();
+                    //StockBot stockBot = new StockBot();
+                    //msg.Text = result;
                 }
-                else
-                {
-                    var sender = await _userManager.GetUserAsync(User);
-                    msg.UserID = sender.Id;
-                    await _context.Messages.AddAsync(msg);
-                    await _context.SaveChangesAsync();
-                    return Ok();
-                }
+
+                // msg.MsgDate = now;
+                // msg.Text = msgText;
+                var sender = await _userManager.GetUserAsync(User);
+                msg.UserID = sender.Id;
+                await _context.Messages.AddAsync(msg);
+                await _context.SaveChangesAsync();
+                return Ok();
             }            
             return Error();
         }
