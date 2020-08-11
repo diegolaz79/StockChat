@@ -8,3 +8,21 @@ Update-Database desde la consola de visual studio para que cree la base de datos
 
 Once the solution was opended in Visual Studio, run the command
 Update-Database from the package manager console to create the local database.
+
+This was an excercise to:
+
+● Allow registered users to log in and talk with other users in a chatroom.
+● Allow users to post messages as commands into the chatroom with the following format
+/stock=stock_code
+● Create a decoupled bot that will call an API using the stock_code as a parameter
+(https://stooq.com/q/l/?s=aapl.us&f=sd2t2ohlcv&h&e=csv, here aapl.us is the
+stock_code)
+● The bot should parse the received CSV file and then it should send a message back into
+the chatroom using a message broker like RabbitMQ. The message will be a stock quote
+using the following format: “APPL.US quote is $93.42 per share”. The post owner will be
+the bot.
+● Have the chat messages ordered by their timestamps and show only the last 50
+messages.
+
+
+Known bug: did it in short time. So just when I finished I realized the "logic" of interpreting the /stock command was left in the back end instead of the front end, so it wrongly saves the quote information and also doesn't show it in the back end until the site is refreshed and information is pulled from the database.
