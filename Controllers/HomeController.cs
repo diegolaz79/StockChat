@@ -42,11 +42,14 @@ namespace StockChat.Controllers
         {
             var now = new DateTime();
             //Message msg = new Message();
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && msg != null && msg.Text.Length > 0)
             {
+                if (msg.Text.Contains("/stock="))
+                {
+                    return Ok();
+                }
                 msg.UserName = User.Identity.Name;
-
-                ///stock=stock_code
+                /*
                 if (msg.Text.Contains("/stock="))
                 {
                     string quote = msg.Text.Replace("/stock=", "");
@@ -55,9 +58,7 @@ namespace StockChat.Controllers
                     //StockBot stockBot = new StockBot();
                     //msg.Text = result;
                 }
-
-                // msg.MsgDate = now;
-                // msg.Text = msgText;
+                */
                 var sender = await _userManager.GetUserAsync(User);
                 msg.UserID = sender.Id;
                 await _context.Messages.AddAsync(msg);
@@ -66,7 +67,7 @@ namespace StockChat.Controllers
             }            
             return Error();
         }
-        
+
         public IActionResult Privacy()
         {
             return View();

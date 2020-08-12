@@ -14,12 +14,21 @@ const chat = document.getElementById('chat');
 const messagesQueue = [];
 
 document.getElementById('submitButton').addEventListener('click', () => {
+    var msg = $("#messageText").val();
+    if (msg.length == 0) {
+        alert("Mensaje vacio!");
+        return false;
+    }
+    //console.log("Send chat message..." + msg);
+    
+    
     var currentdate = new Date();
-    msgDate.innerHTML =
+    /*msgDate.innerHTML =
         (currentdate.getMonth() + 1) + "/"
         + currentdate.getDate() + "/"
         + currentdate.getFullYear() + " "
         + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+        */
 });
 
 function clearInputField() {
@@ -36,9 +45,10 @@ function sendMessage() {
     sendMessageToHub(message);
 }
 
-function addMessageToChat(message) {
+function addMessageToChatQithQuote(message) {
+    var msg = message.text;
+    var msgText = "";
     let isCurrentUserMessage = message.userName === username;
-
     let container = document.createElement('div');
     container.className = isCurrentUserMessage ? "container darker" : "container";
 
@@ -46,12 +56,16 @@ function addMessageToChat(message) {
     sender.className = "sender";
     sender.innerHTML = message.userName;
     let text = document.createElement('p');
-    text.innerHTML = message.text;
-
+    if (msgText.length > 0) {
+        text.innerHTML = msgText;
+    }
+    else {
+        text.innerHTML = message.text;
+    }
     let msgDate = document.createElement('span');
     msgDate.className = isCurrentUserMessage ? "time-left" : "time-right";
     var currentdate = new Date();
-    msgDate.innerHTML = 
+    msgDate.innerHTML =
         (currentdate.getMonth() + 1) + "/"
         + currentdate.getDate() + "/"
         + currentdate.getFullYear() + " "
@@ -61,4 +75,40 @@ function addMessageToChat(message) {
     container.appendChild(text);
     container.appendChild(msgDate);
     chat.appendChild(container);
+}
+
+function addMessageToChat(message) {
+    var msg = message.text;
+    var msgText = "";
+    if (msg.includes("/stock")) {
+        console.log("Check stock!");
+        msg = msg.replace("/stock=", "");
+        $.ajax({
+            type: "GET",
+            url: "/api/StockAPI/" + msg,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                message.text = data.responseText;
+                addMessageToChatQithQuote(message);
+            },
+            failure: function (data) {
+                message.text = data.responseText;
+                addMessageToChatQithQuote(message);
+            }, //End of AJAX failure function  
+            error: function (data) {
+                message.text = data.responseText;
+                addMessageToChatQithQuote(message);
+            } //End of AJAX error function  
+
+            });
+    }
+    else {
+        addMessageToChatQithQuote(message);
+    }
+
+    
+    
+
+   
 }

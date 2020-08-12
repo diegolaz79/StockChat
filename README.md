@@ -29,4 +29,5 @@ the bot.
 messages.
 
 
-Known bug: did it in short time. So just when I finished I realized the "logic" of interpreting the /stock command was left in the back end instead of the front end, so it wrongly saves the quote information and also doesn't show it in the back end until the site is refreshed and information is pulled from the database.
+Added API for getting quote.
+Added swagner https://localhost:44371/swagger/ for testing the API.

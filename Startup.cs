@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockChat.SignalRHub;
 using StockChat.Models;
+using Swashbuckle.Swagger;
 
 namespace StockChat
 {
@@ -39,6 +40,10 @@ namespace StockChat
             services.AddSignalR();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo());// ({ Title = "StockAPI", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +67,15 @@ namespace StockChat
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Stock API V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {
