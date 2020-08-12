@@ -28,6 +28,7 @@ the bot.
 ● Have the chat messages ordered by their timestamps and show only the last 50
 messages.
 
+[2020-08-12]
 
 Added API for getting quote.
 
