@@ -30,4 +30,5 @@ messages.
 
 
 Added API for getting quote.
+
 Added swagner https://localhost:44371/swagger/ for testing the API.
